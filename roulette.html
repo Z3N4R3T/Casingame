@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101b18">
+  <title>European Roulette | Tablewise</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="roulette.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="mainpage.html" aria-label="Tablewise game menu">
+      <span class="brand-mark" aria-hidden="true">◎</span>
+      <span>Table<span class="brand-accent">wise</span></span>
+    </a>
+    <span class="top-note"><span class="live-dot"></span> EUROPEAN ROULETTE</span>
+    <button class="button button-secondary end-game-button" id="end-game" type="button">End game</button>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">SINGLE-ZERO WHEEL</p>
+        <h1>European Roulette, <span>place your bet.</span></h1>
+        <p class="intro-copy">Set your stake, then click any number or color to place it on the table. You can place multiple bets before spinning.</p>
+      </div>
+      <div class="shoe-badge">0–36 · 37 POCKETS</div>
+    </section>
+
+    <section class="table-panel extra-game-panel" aria-label="European roulette table">
+      <div class="table-topline">
+        <div class="table-label"><span class="table-dot"></span> ROULETTE TABLE</div>
+        <div class="shoe-left">EUROPEAN · SINGLE ZERO</div>
+      </div>
+      <div class="felt roulette-felt">
+        <button class="button button-secondary fullscreen-felt-button" id="fullscreen-toggle" type="button" aria-pressed="false">Full screen</button>
+        <div class="roulette-wheel-wrap" aria-live="polite">
+          <div class="roulette-wheel" id="roulette-wheel">
+            <svg class="roulette-dial" id="roulette-dial" viewBox="0 0 400 400" role="img" aria-label="European roulette wheel"></svg>
+            <div class="wheel-center">
+              <span class="wheel-center-brand" id="wheel-center-brand">TABLE<br>WISE</span>
+              <strong class="wheel-result" id="wheel-result" aria-live="polite"></strong>
+            </div>
+            <span class="roulette-ball-track" id="roulette-ball-track" aria-hidden="true">
+              <span class="roulette-ball"></span>
+            </span>
+          </div>
+          <div class="wheel-caption" id="wheel-caption">Ready for the next spin</div>
+        </div>
+        <div class="roulette-bet-area">
+          <div class="roulette-board-heading">
+            <span class="bet-label">CHOOSE A NUMBER OR COLOR</span>
+            <span class="bet-label">STRAIGHT NUMBERS PAY 35:1 · COLORS PAY 1:1</span>
+          </div>
+          <div class="roulette-color-bets" role="group" aria-label="Color bets">
+            <button class="roulette-spot color-red" type="button" data-bet-type="color" data-bet-value="red" aria-label="Bet on red">
+              <span>RED · 1:1</span><span class="roulette-chip" hidden></span>
+            </button>
+            <button class="roulette-spot color-black" type="button" data-bet-type="color" data-bet-value="black" aria-label="Bet on black">
+              <span>BLACK · 1:1</span><span class="roulette-chip" hidden></span>
+            </button>
+            <button class="roulette-spot color-green" type="button" data-bet-type="color" data-bet-value="green" aria-label="Bet on green zero">
+              <span>GREEN · 35:1</span><span class="roulette-chip" hidden></span>
+            </button>
+          </div>
+          <div class="roulette-number-board" id="roulette-number-board" role="group" aria-label="Roulette numbers 0 through 36">
+            <button class="roulette-spot number-spot number-green" type="button" data-bet-type="number" data-bet-value="0" aria-label="Bet on 0, green, pays 35 to 1">
+              <span>0</span><span class="roulette-chip" hidden></span>
+            </button>
+            <div class="roulette-number-grid" id="roulette-number-grid"></div>
+          </div>
+        </div>
+        <div class="round-message roulette-message" id="roulette-message" role="status" aria-live="polite">
+          <span class="message-icon" aria-hidden="true">✦</span>
+          <span>Choose your bet and spin.</span>
+        </div>
+      </div>
+      <div class="table-controls">
+        <div class="betting-controls">
+          <div class="wallet-summary">
+            <div class="wallet-balance"><span class="bet-label">YOUR CHIPS</span><strong id="chip-balance">100</strong></div>
+            <div class="zero-counter"><span class="bet-label">GONE TO ZERO</span><strong id="zero-count">0</strong></div>
+            <div class="active-bet"><span class="bet-label">ON TABLE</span><strong id="active-bet">0</strong></div>
+          </div>
+          <label class="bet-label bet-input-label" for="bet-amount">BET AMOUNT <span>CHIPS</span></label>
+          <div class="bet-input-row">
+            <input id="bet-amount" type="number" min="0.01" max="100" step="0.01" value="25" inputmode="decimal" aria-label="Bet amount in chips">
+            <button class="button button-secondary" id="all-in" type="button">All in</button>
+          </div>
+          <span class="bet-error" id="bet-error" role="status"></span>
+        </div>
+        <div class="action-buttons">
+          <button class="button button-secondary" id="clear-bets" type="button" disabled>Clear bets</button>
+          <button class="button button-primary" id="spin-button" type="button">Spin wheel →</button>
+        </div>
+      </div>
+    </section>
+
+    <p class="game-disclaimer">Practice chips only. Straight-up numbers and green pay 35:1; red and black pay 1:1. Zero wins only on a zero or green bet.</p>
+    <footer><span>TABLEWISE</span><span>Practice chips only. Play responsibly.</span></footer>
+  </main>
+</body>
+</html>

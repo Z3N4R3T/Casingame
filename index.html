@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101b18">
+  <title>Blackjack Count Trainer</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-game="blackjack">
+  <header class="topbar">
+    <a class="brand" href="mainpage.html" aria-label="Tablewise game menu">
+      <span class="brand-mark" aria-hidden="true">♠</span>
+      <span>Table<span class="brand-accent">wise</span></span>
+    </a>
+    <span class="top-note"><span class="live-dot"></span> BLACKJACK COUNT TRAINER</span>
+    <button class="button button-secondary end-game-button" id="end-game-button" type="button" title="Return to the game menu. Ending a hand early forfeits its bet.">End game</button>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">LEARN BY PLAYING</p>
+        <h1 id="game-title">Blackjack, <span>with a sharper eye.</span></h1>
+        <p class="intro-copy" id="game-description">Play a hand while keeping a Hi-Lo count. The counter updates as cards are revealed, so you can see the method in action.</p>
+      </div>
+      <div class="shoe-badge" id="shoe-badge"><span aria-hidden="true">✦</span> 6-DECK SHOE</div>
+    </section>
+
+    <div class="game-layout">
+      <section class="table-panel" id="table-panel" aria-label="Blackjack table">
+        <div class="table-topline">
+          <div class="table-label"><span class="table-dot"></span> <span id="table-name">BLACKJACK</span></div>
+          <div class="shoe-left"><span id="cards-remaining">312</span> cards in shoe</div>
+        </div>
+
+        <div class="felt">
+          <div class="hand-area dealer-area">
+            <div class="hand-heading">
+              <span class="hand-name" id="dealer-label">DEALER</span>
+              <span class="hand-total" id="dealer-total" aria-live="polite"></span>
+            </div>
+            <div class="cards" id="dealer-cards" aria-label="Dealer's cards"></div>
+          </div>
+
+          <div class="table-divider"><span>♣</span></div>
+
+          <div class="hand-area player-area">
+            <div class="hand-heading">
+              <span class="hand-name" id="player-label">YOU</span>
+              <span class="hand-progress" id="hand-progress"></span>
+              <span class="hand-total" id="player-total" aria-live="polite"></span>
+            </div>
+            <div class="cards" id="player-cards" aria-label="Your cards"></div>
+          </div>
+
+          <div class="round-message" id="round-message" role="status" aria-live="polite">
+            <span class="message-icon" aria-hidden="true">✦</span>
+            <span>Ready when you are. Deal a hand to begin.</span>
+          </div>
+        </div>
+
+        <div class="table-controls">
+          <div class="betting-controls">
+            <div class="wallet-summary">
+              <div class="wallet-balance"><span class="bet-label">YOUR CHIPS</span><strong id="chip-balance">100</strong></div>
+              <div class="zero-counter"><span class="bet-label">GONE TO ZERO</span><strong id="zero-count">0</strong></div>
+              <div class="active-bet"><span class="bet-label">IN PLAY</span><strong id="active-bet">0</strong></div>
+            </div>
+            <label class="bet-label bet-input-label" for="bet-amount">BET AMOUNT <span>CHIPS · MAX 20,000</span></label>
+            <div class="bet-input-row">
+              <input id="bet-amount" type="number" min="0.01" max="20000" step="0.01" value="25" inputmode="decimal" aria-label="Bet amount in chips">
+              <button class="button button-secondary all-in-button" id="all-in-button" type="button">All in</button>
+            </div>
+            <span class="bet-error" id="bet-error" role="status"></span>
+            <div class="baccarat-wagers" id="baccarat-wagers" hidden aria-label="Choose a baccarat bet">
+              <span class="bet-label">BET ON</span>
+              <div>
+                <button class="button button-secondary wager-button is-selected" data-wager="player" type="button">Player</button>
+                <button class="button button-secondary wager-button" data-wager="banker" type="button">Banker</button>
+                <button class="button button-secondary wager-button" data-wager="tie" type="button">Tie</button>
+              </div>
+              <span class="baccarat-rules">Player pays 1:1; Banker pays 0.95:1; Tie pays 8:1. Ties push Player/Banker bets.</span>
+            </div>
+          </div>
+          <div class="action-buttons">
+            <button class="button button-secondary blackjack-action" id="split-button" type="button" title="Split an equal-rank pair into two hands" disabled>Split pair</button>
+            <button class="button button-secondary blackjack-action" id="double-button" type="button" title="Double this hand’s bet, draw one card, then stand" disabled>Double down</button>
+            <button class="button button-secondary blackjack-action" id="hit-button" type="button" disabled>Hit <span aria-hidden="true">＋</span></button>
+            <button class="button button-secondary blackjack-action" id="stand-button" type="button" disabled>Stand <span aria-hidden="true">✓</span></button>
+            <button class="button button-primary" id="deal-button" type="button">Deal hand <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="counter-panel" aria-labelledby="counter-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">LIVE CARD TRACKER</p>
+            <h2 id="counter-title">The count</h2>
+          </div>
+          <span class="tracker-icon" aria-hidden="true">⌁</span>
+        </div>
+
+        <div class="count-display">
+          <span class="count-caption">RUNNING COUNT</span>
+          <strong id="running-count" aria-live="polite">0</strong>
+          <span class="count-description" id="count-description">Start at zero. Count every card you can see.</span>
+        </div>
+
+        <div class="count-stats">
+          <div class="stat">
+            <span>TRUE COUNT</span>
+            <strong id="true-count">0.0</strong>
+          </div>
+          <div class="stat">
+            <span>DECKS LEFT</span>
+            <strong id="decks-remaining">6.0</strong>
+          </div>
+        </div>
+
+        <div class="bust-risk" aria-live="polite">
+          <div>
+            <span class="risk-label">NEXT HIT BUST CHANCE</span>
+            <strong id="bust-probability">—</strong>
+          </div>
+          <p id="bust-description">Deal a hand to calculate the chance your next card takes you over 21.</p>
+        </div>
+
+        <div class="recent-section">
+          <div class="recent-heading"><span>RECENTLY COUNTED</span><span id="cards-seen">0 seen</span></div>
+          <div class="counted-cards" id="counted-cards" aria-label="Recently counted cards">
+            <span class="empty-cards">Cards appear here as they’re revealed</span>
+          </div>
+        </div>
+        <p class="counter-footnote" id="counter-footnote">The dealer’s face-down card is not counted until it’s revealed.</p>
+      </aside>
+    </div>
+
+    <section class="lesson" id="blackjack-lesson" aria-labelledby="lesson-title">
+      <div class="lesson-title">
+        <p class="eyebrow">THE BASICS</p>
+        <h2 id="lesson-title">How Hi-Lo counting works</h2>
+        <p>It’s a way to keep track of which cards have left the shoe—not a way to predict the exact next card.</p>
+      </div>
+      <div class="lesson-steps">
+        <article class="lesson-step">
+          <span class="step-number">01</span>
+          <div>
+            <h3>Give each card a value</h3>
+            <div class="value-key">
+              <span class="value-chip positive">2–6 <b>+1</b></span>
+              <span class="value-chip neutral">7–9 <b>0</b></span>
+              <span class="value-chip negative">10–A <b>−1</b></span>
+            </div>
+          </div>
+        </article>
+        <article class="lesson-step">
+          <span class="step-number">02</span>
+          <div>
+            <h3>Keep a running count</h3>
+            <p>Start at zero. Add each card’s value as it becomes visible. Low cards raise the count; high cards lower it.</p>
+          </div>
+        </article>
+        <article class="lesson-step">
+          <span class="step-number">03</span>
+          <div>
+            <h3>Adjust for the decks left</h3>
+            <p>Divide the running count by the estimated decks remaining to get the true count. It helps compare counts at different shoe depths.</p>
+          </div>
+        </article>
+      </div>
+      <p class="lesson-note"><span aria-hidden="true">ⓘ</span> This is a practice tool for learning the arithmetic. A win returns twice your bet; a push returns your bet. Card counting does not guarantee a win.</p>
+    </section>
+
+    <footer><span>TABLEWISE</span><span>Practice the count. Play responsibly.</span></footer>
+  </main>
+</body>
+</html>

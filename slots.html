@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101b18">
+  <title>Slots | Tablewise</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="slots.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="mainpage.html" aria-label="Tablewise game menu">
+      <span class="brand-mark" aria-hidden="true">🎰</span>
+      <span>Table<span class="brand-accent">wise</span></span>
+    </a>
+    <span class="top-note"><span class="live-dot"></span> PROGRESSIVE SLOTS</span>
+    <button class="button button-secondary end-game-button" id="end-game" type="button">End game</button>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">FIVE-REEL JACKPOT</p>
+        <h1>Slots, <span>spin for the jackpot.</span></h1>
+        <p class="intro-copy">Match symbols across five paylines, including two zigzags. Multiplier tokens boost wins and unlock automatic free spins.</p>
+      </div>
+      <div class="shoe-badge">✦ PROGRESSIVE JACKPOT</div>
+    </section>
+
+    <section class="table-panel extra-game-panel slots-panel" aria-label="Progressive slots game">
+      <div class="table-topline">
+        <div class="table-label"><span class="table-dot"></span> TABLEWISE SLOTS</div>
+        <div class="shoe-left">3 × 5 REELS · 5 ACTIVE PAYLINES</div>
+      </div>
+      <div class="felt slots-felt">
+        <div class="slots-machine-top">
+          <div class="slots-jackpot">
+            <span class="bet-label">PROGRESSIVE JACKPOT</span>
+            <strong id="jackpot-amount">1,000.00</strong>
+            <span class="slots-jackpot-note">💎 💎 💎 · JACKPOT</span>
+          </div>
+          <div class="slots-paytable" aria-label="Payouts">
+            <span><strong>7</strong> 20×</span>
+            <span><strong>BAR</strong> 10×</span>
+            <span><strong>🔔</strong> 6×</span>
+            <span><strong>🍒</strong> 4×</span>
+            <span><strong>🍋</strong> 3×</span>
+            <span><strong>💎 ×3+</strong> JACKPOT</span>
+            <span><strong>4 IN LINE</strong> 2× LINE PRIZE · <strong>5</strong> 4×</span>
+            <span><strong>×2 ×3 ×5</strong> ANY TOKEN BOOSTS WINS</span>
+            <span><strong>3+ TOKENS</strong> 10 FREE AUTOPLAY · STACK MULTIPLIERS</span>
+          </div>
+        </div>
+        <div class="slots-grid" id="slots-grid" role="img" aria-label="Slot result grid, 3 rows by 5 reels">
+          <svg class="slots-payline-layer" viewBox="0 0 500 300" preserveAspectRatio="none" aria-hidden="true">
+            <path class="slots-payline" d="M50 50 H450"></path>
+            <path class="slots-payline" d="M50 150 H450"></path>
+            <path class="slots-payline" d="M50 250 H450"></path>
+            <path class="slots-payline" d="M50 50 L150 150 L250 250 L350 150 L450 50"></path>
+            <path class="slots-payline" d="M50 250 L150 150 L250 50 L350 150 L450 250"></path>
+          </svg>
+        </div>
+        <div class="slots-wins" id="slots-wins" aria-live="polite" aria-label="Winning paylines"></div>
+        <p class="slots-bonus" id="bonus-info" aria-live="polite"></p>
+        <div class="round-message slots-message" id="slots-message" role="status" aria-live="polite">
+          <span class="message-icon" aria-hidden="true">✦</span>
+          <span>Set your bet and spin.</span>
+        </div>
+      </div>
+      <div class="table-controls">
+        <div class="betting-controls">
+          <div class="wallet-summary">
+            <div class="wallet-balance"><span class="bet-label">YOUR CHIPS</span><strong id="chip-balance">100.00</strong></div>
+            <div class="zero-counter"><span class="bet-label">GONE TO ZERO</span><strong id="zero-count">0</strong></div>
+          </div>
+          <label class="bet-label bet-input-label" for="bet-amount">TOTAL BET · 5 LINES <span>CHIPS</span></label>
+          <div class="bet-input-row">
+            <input id="bet-amount" type="number" min="0.01" max="100" step="0.01" value="25" inputmode="decimal" aria-label="Bet amount in chips">
+            <button class="button button-secondary all-in-button" id="all-in" type="button">All in</button>
+          </div>
+          <span class="bet-error" id="bet-error" role="status"></span>
+        </div>
+        <div class="action-buttons">
+          <button class="button button-primary" id="spin-button" type="button">Spin →</button>
+        </div>
+      </div>
+    </section>
+
+    <p class="game-disclaimer">Practice chips only. Your total bet is split evenly across 5 paylines: top, middle, bottom, and two zigzags. Match 3 or more identical symbols consecutively from the left. Four in a row pays 2× and five pays 4× the listed line prize. Each paid spin adds 5% to the jackpot; ×2, ×3, and ×5 tokens multiply wins. Three or more tokens award 10 free autoplay spins; tokens in free spins multiply and retrigger the bonus.</p>
+    <footer><span>TABLEWISE</span><span>Practice chips only. Play responsibly.</span></footer>
+  </main>
+</body>
+</html>
